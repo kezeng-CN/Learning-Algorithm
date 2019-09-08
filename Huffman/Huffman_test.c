@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "HuffmanCode.h"
 
-
-int main(int argc, char *argv[])
+void huffman_tree_test();
+void huffman_tree_test()
 {
     int freq[256];
     HuffmanTree tree;
@@ -16,6 +16,4 @@ int main(int argc, char *argv[])
     Compress("Jane+Eyre.txt", tree, "Compressed_Jane+Eyre");
     // Destroy the tree
     DestroyHuffmanTree(tree);
-
-    return 0;
 }
