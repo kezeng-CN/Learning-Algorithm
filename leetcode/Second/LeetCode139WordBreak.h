@@ -72,8 +72,10 @@ void test()
 }
 } // namespace wordBreak_1
 
+#include <algorithm>
 namespace wordBreak_2
 {
+using std::find;
 using std::string;
 using std::vector;
 class Solution
@@ -81,8 +83,37 @@ class Solution
 public:
     bool wordBreak(string s, vector<string> &wordDict)
     {
-        // 未完成
-        return false;
+        vector<int> dp_wordbreak(s.size(), 0);
+        for (size_t i = 0; i < s.size(); i++)
+        {
+            // 判断整个字符串
+            string str_prefix = s.substr(0, i + 1);
+            auto it_word = find(wordDict.begin(), wordDict.end(), str_prefix);
+            if (it_word != wordDict.end())
+            {
+                // 匹配到
+                dp_wordbreak[i] = 1;
+            }
+            else
+            {
+                // 未匹配
+                for (size_t j = 0; j <= i; j++)
+                {
+                    if (dp_wordbreak[j] == 1)
+                    {
+                        // 前缀有匹配故匹配后缀
+                        str_prefix = s.substr(j + 1, i - j);
+                        auto it_word = find(wordDict.begin(), wordDict.end(), str_prefix);
+                        if (it_word != wordDict.end())
+                        {
+                            dp_wordbreak[i] = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return dp_wordbreak[s.size() - 1];
     }
 };
 void test()
