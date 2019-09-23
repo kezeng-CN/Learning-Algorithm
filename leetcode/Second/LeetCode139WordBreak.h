@@ -125,18 +125,18 @@ void test()
     Solution obj;
     if (obj.wordBreak(s, wordDict))
     {
-        printf("true");
+        printf("true\n");
     }
     else
     {
-        printf("false");
+        printf("false\n");
     }
 }
 } // namespace wordBreak_2
 
 void WordBreak_test()
 {
-    // wordBreak_1::test();
+    wordBreak_1::test();
     wordBreak_2::test();
 }
 
